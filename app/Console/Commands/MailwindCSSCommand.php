@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class MailwindCSSCommand extends Command
 {
-    protected $signature = 'mailwind-css';
+    protected $signature = 'refresh:mailwind';
     protected $description = 'Generate corresponding CSS file';
 
     # add view file here to generate its css style (tips: copy the relative path of the file and past it here, note: remove the '.blade.php' at the end)
@@ -16,14 +16,19 @@ class MailwindCSSCommand extends Command
 
     public function handle()
     {
+        $this->components->info('Refreshing mailwind templates...');
+
         $commands = collect($this->resources)
-            ->map(fn ($resource) => "mailwind --input-html {$resource}.blade.php --output-css {$resource}-css.blade.php")
+            ->map(fn($resource) => "mailwind --input-html {$resource}.blade.php --output-css {$resource}-css.blade.php")
             ->join(' && ');
 
         shell_exec($commands);
 
         // Wrap the generated CSS files with <style> tags and update Blade templates
         collect($this->resources)->each(function ($resource) {
+            $this->components->twoColumnDetail("$resource.blade.php", '<fg=yellow;options=bold>RUNNING</>');
+            $startTime = microtime(true);
+
             $cssFile = "{$resource}-css.blade.php";
             $bladeFile = "{$resource}.blade.php";
 
@@ -70,6 +75,10 @@ class MailwindCSSCommand extends Command
                     }
                 }
             }
+
+            $runTime = number_format((microtime(true) - $startTime) * 1000);
+            $this->components->twoColumnDetail("$resource.blade.php", "<fg=gray>$runTime ms</> <fg=green;options=bold>DONE</>");
+            $this->newLine();
         });
 
         return "CSS files have been generated, wrapped with <style> tags, and Blade templates updated.";
