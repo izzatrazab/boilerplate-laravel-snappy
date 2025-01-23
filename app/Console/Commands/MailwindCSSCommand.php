@@ -18,17 +18,16 @@ class MailwindCSSCommand extends Command
     {
         $this->components->info('Refreshing mailwind templates...');
 
-        $commands = collect($this->resources)
-            ->map(fn($resource) => "mailwind --input-html {$resource}.blade.php --output-css {$resource}-css.blade.php")
-            ->join(' && ');
-
-        shell_exec($commands);
-
-        // Wrap the generated CSS files with <style> tags and update Blade templates
         collect($this->resources)->each(function ($resource) {
-            $this->components->twoColumnDetail("$resource.blade.php", '<fg=yellow;options=bold>RUNNING</>');
-            $startTime = microtime(true);
 
+            # capture current time (indicator for start time)
+            $startTime = microtime(true);
+            $this->components->twoColumnDetail("$resource.blade.php", '<fg=yellow;options=bold>RUNNING</>');
+
+            # execute mailwind process
+            shell_exec("mailwind --input-html {$resource}.blade.php --output-css {$resource}-css.blade.php");
+
+            # wrapping process
             $cssFile = "{$resource}-css.blade.php";
             $bladeFile = "{$resource}.blade.php";
 
@@ -76,6 +75,7 @@ class MailwindCSSCommand extends Command
                 }
             }
 
+            # calculate total time
             $runTime = number_format((microtime(true) - $startTime) * 1000);
             $this->components->twoColumnDetail("$resource.blade.php", "<fg=gray>$runTime ms</> <fg=green;options=bold>DONE</>");
             $this->newLine();

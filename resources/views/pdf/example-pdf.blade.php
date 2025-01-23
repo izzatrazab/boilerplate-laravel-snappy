@@ -9,7 +9,11 @@
 @section('content')
 
     <div class="font-bold italic underline w-full text-center">
-        Example PDF
+        Example PDFtest
+    </div>
+
+    <div class="bg-fuchsia-500">
+        aqua
     </div>
 
 @endsection

@@ -3,6 +3,10 @@
   width: 100%
 }
 
+.bg-fuchsia-500 {
+  background-color: #d946ef
+}
+
 .text-center {
   text-align: center
 }
