@@ -1,5 +1,27 @@
 <?php
 
+$wkhtmltopdf = [
+    'mac-os'    => base_path('resources/wkhtmltopdf/wkhtmltopdf'),
+    'win-64'    => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/64bit/wkhtmltopdf'),
+    'win-32'    => base_path('vendor/wemersonjanuario/wkhtmltopdf-windows/bin/32bit/wkhtmltopdf'),
+    'amd64'     => base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'), // (probably for linux or older mac)
+];
+
+$wkhtmltoimage = [
+    'mac-os'    => base_path('resources/wkhtmltopdf/wkhtmltoimage'),
+    'win-64'    => base_path('vendor/wemersonjanuario/wkhtmltopdf/bin/64bit/wkhtmltoimage'),
+    'win-32'    => base_path('vendor/wemersonjanuario/wkhtmltopdf/bin/32bit/wkhtmltoimage'),
+    'amd64'     => base_path('vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64') // (probably for linux or older mac)
+];
+
+/**
+ * wrap with double quotes (") to ensure path still can be read even if there are spaces in it
+ */
+function wrapWithQuotes(string $path): string
+{
+    return '"' . $path . '"';
+}
+
 return [
 
     /*
@@ -35,8 +57,7 @@ return [
 
     'pdf' => [
         'enabled' => true,
-        // 'binary'  => env('WKHTML_PDF_BINARY',  base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64')), windows 64 bit system
-        'binary'  => env('WKHTML_PDF_BINARY', base_path('resources/wkhtmltopdf/wkhtmltopdf')), // mac os
+        'binary'  => env('WKHTML_PDF_BINARY', wrapWithQuotes($wkhtmltopdf['mac-os'])), // change your path according to your machine
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
@@ -46,8 +67,7 @@ return [
 
     'image' => [
         'enabled' => true,
-        // 'binary'  => env('WKHTML_IMG_BINARY', base_path('vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64')), windows 64 bit system
-        'binary'  => env('WKHTML_IMG_BINARY', base_path('resources/wkhtmltopdf/wkhtmltoimage')), // mac os
+        'binary'  => env('WKHTML_IMG_BINARY', wrapWithQuotes($wkhtmltoimage['mac-os'])), // change your path according to your machine
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
