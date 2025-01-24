@@ -1,7 +1,7 @@
 @extends('pdf.layouts.pdf-layout')
 
 @section('css')
-    @include('pdf.example-pdf-css')
+    @include('pdf.examples.example-pdf-css')
 @endsection
 
 @section('title', $title ?? config('app.name'))

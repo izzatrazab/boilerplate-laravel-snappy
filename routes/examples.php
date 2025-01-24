@@ -2,9 +2,24 @@
 
 use Barryvdh\Snappy\Facades\SnappyPdf;
 
-Route::get('/attachment', function () {
-    $title = 'attachment';
-    return SnappyPdf::loadView('pdf.example-pdf', [
+Route::get('/example', function () {
+    $title = 'example';
+    return SnappyPdf::loadView('pdf.examples.example-pdf', [
         'title' => $title
-    ])->inline($title . '.pdf');
-})->name('lampiran');
+    ])
+        ->inline($title . '.pdf');
+})->name('example');
+
+Route::get('/poster', function () {
+    $title = 'poster';
+    return SnappyPdf::loadView('pdf.examples.poster', [
+        'title' => $title
+    ])
+        ->setOptions([
+            'margin-top' => '0',
+            'margin-right' => '0',
+            'margin-bottom' => '0',
+            'margin-left' => '0',
+        ])
+        ->inline($title . '.pdf');
+})->name('poster');
