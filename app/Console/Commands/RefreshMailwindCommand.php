@@ -4,20 +4,20 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class MailwindCSSCommand extends Command
+class RefreshMailwindCommand extends Command
 {
     protected $signature = 'refresh:mailwind';
     protected $description = 'Generate corresponding CSS file';
 
     # add view file here to generate its css style (tips: copy the relative path of the file and past it here, note: remove the '.blade.php' at the end)
     protected array $resources = [
-        // 'resources/views/pdf/examples/example-pdf',
-        // 'resources/views/pdf/examples/poster',
+        'resources/views/pdf/examples/example-pdf',
+        'resources/views/pdf/examples/poster',
     ];
 
     public function handle()
     {
-        $this->components->info('Refreshing mailwind templates...');
+        $this->components->info('Refreshing blade templates using mailwind ...');
 
         collect($this->resources)->each(function ($resource) {
 
@@ -52,11 +52,11 @@ class MailwindCSSCommand extends Command
                 $formattedCssFile = str_replace('/', '.', $formattedCssFile);
                 $formattedCssFile = preg_replace('/\.blade\.php$/', '', $formattedCssFile);
 
-                // Prepare the section and include directives
-                $sectionInclude = "\n@section('css')\n    @include('{$formattedCssFile}')\n@endsection\n";
-
                 // Check if the @include directive is present
                 if (strpos($bladeContent, "@include('{$formattedCssFile}')") === false) {
+                    // Prepare the push  and include directives
+                    $sectionInclude = "\n@push('css')\n @include('{$formattedCssFile}')\n@endpush\n";
+
                     // Find the position of @extends
                     $extendsPos = strpos($bladeContent, '@extends');
 

@@ -1,6 +1,6 @@
 @extends('pdf.layouts.pdf-layout')
 
-@section('css')
+@push('css')
     @include('pdf.examples.poster-css')
     <style>
         html {
@@ -26,7 +26,7 @@
             /* background-color: black; */
         }
     </style>
-@endsection
+@endpush
 
 @section('title', 'example: poster')
 
