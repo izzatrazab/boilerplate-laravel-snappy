@@ -57,7 +57,7 @@ return [
 
     'pdf' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_PDF_BINARY', wrapWithQuotes($wkhtmltopdf['amd64'])), // change your path according to your machine
+        'binary'  => wrapWithQuotes($wkhtmltopdf[env('SNAPPY_MACHINE')]), // change your path according to your machine
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
@@ -67,7 +67,7 @@ return [
 
     'image' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_IMG_BINARY', wrapWithQuotes($wkhtmltoimage['amd64'])), // change your path according to your machine
+        'binary'  => wrapWithQuotes($wkhtmltoimage[env('SNAPPY_MACHINE')]), // change your path according to your machine
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,

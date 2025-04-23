@@ -10,6 +10,20 @@ Route::get('/example', function () {
         ->inline($title . '.pdf');
 })->name('example');
 
+Route::get('/example-2', function () {
+    $title = 'example-2';
+    return SnappyPdf::loadView('pdf.examples.example-2', [
+        'title' => $title
+    ])
+        ->setOptions([
+            'margin-top'    => '20mm',
+            'margin-right'  => '10mm',
+            'margin-bottom' => '20mm',
+            'margin-left'   => '10mm',
+        ])
+        ->inline($title . '.pdf');
+})->name('example-2');
+
 Route::get('/poster', function () {
     $title = 'poster';
     return SnappyPdf::loadView('pdf.examples.poster', [
@@ -23,3 +37,4 @@ Route::get('/poster', function () {
         ])
         ->inline($title . '.pdf');
 })->name('poster');
+

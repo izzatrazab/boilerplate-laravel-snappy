@@ -11,8 +11,9 @@ class RefreshMailwindCommand extends Command
 
     # add view file here to generate its css style (tips: copy the relative path of the file and past it here, note: remove the '.blade.php' at the end)
     protected array $resources = [
-        'resources/views/pdf/examples/example-pdf',
-        'resources/views/pdf/examples/poster',
+        // 'resources/views/pdf/examples/example-pdf',
+        // 'resources/views/pdf/examples/poster',
+        'resources/views/pdf/examples/example-2',
     ];
 
     public function handle()
