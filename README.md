@@ -3,6 +3,8 @@
 ## About
 Minimal Setup for barryvdh/laravel-snappy package. Please note that this boilerplate isn’t meant for production projects. It’s only a quick scaffold for creating PDF templates. I usually hand it to interns when I need some templates made.
 
+Bare in mind that designing templates are slightly different than designing website page. Therefore, I made some templates as example.
+
 ## Main Items
 1. Laravel Snappy PDF - generate pdf from blade
 2. Mailwind - convert tailwind classes to css styles
