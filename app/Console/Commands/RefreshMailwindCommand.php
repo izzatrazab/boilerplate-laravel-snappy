@@ -13,7 +13,8 @@ class RefreshMailwindCommand extends Command
     protected array $resources = [
         // 'resources/views/pdf/examples/example-pdf',
         // 'resources/views/pdf/examples/poster',
-        'resources/views/pdf/examples/example-2',
+        // 'resources/views/pdf/examples/example-2',
+        // 'resources/views/pdf/examples/example-3',
     ];
 
     public function handle()
