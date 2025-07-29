@@ -18,3 +18,6 @@ Bare in mind that designing templates are slightly different than designing webs
 6. php artisan key:generate
 
 By now you should be able to export blade to pdf
+
+## Contributing
+Feel free to open an issue or submit a pull request.
